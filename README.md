@@ -1,5 +1,4 @@
-# stats220
-## Introduction
+# stats220 Introduction
 This is my repo for STATS 220. 
 
 A little about me:
