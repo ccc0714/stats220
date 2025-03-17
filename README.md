@@ -10,4 +10,4 @@ A little about me:
 A meme that captures how I currently feel about my university studies is ![catdance-gangnam-style](https://c.tenor.com/mPG9PFcv9FQAAAAd/tenor.gif)
 
 ## Projects
-- Making meme by implementing R library *magick* ![cat-nodding](https://c.tenor.com/G7IHS822FD0AAAAd/tenor.gif)
+- Making meme by implementing R library *magick* ![apple-cat](https://media.tenor.com/aH6qp6K6lO4AAAAi/apple-apple-cat.gif)
