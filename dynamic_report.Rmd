@@ -19,6 +19,7 @@ body {
 h1, h2 {line-height: 0.1}
 ```
 
+
 ## Tracking the frequency of user using social media in the last 7 days
 In this study, user (myself) is required to fill up a google form each time I use social media. After collecting the data, I analyze it using bar chart to find which social media is being used most frequently. Then, I generate another bar chart to see the number of time this social media is being use in the last 7 days and find the most and least frequent use day in the last 7 days. 
 
