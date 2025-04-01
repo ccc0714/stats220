@@ -71,7 +71,7 @@ day_bar
 
 #using summarize(frequency = n()) to find the frequency of each date in obej_table
 #using freq_table to find date that user uses the most and least social media and average number of social media use in the last 7 days
-freq_table <- obej_table %>% summarize(frequency = n()) %>% tail(7)
+freq_table <- obej_table %>% summarize(frequency = n()) %>% mutate(Date = factor(Date, levels = unique_date)) %>% arrange(Date) %>% tail(7)
 max_day <- freq_table$Date[which.max(freq_table$frequency)]
 max_num <- max(freq_table$frequency)
 min_day <- freq_table$Date[which.min(freq_table$frequency)]
