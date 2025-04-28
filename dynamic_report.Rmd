@@ -24,8 +24,7 @@ h1, h2 {line-height: 0.1;
 
 ```{r eval=TRUE, echo=FALSE, error=FALSE, warning=FALSE}
 library(magick)
-library(statquotes)
-quote_df <- quotes %>% select(text, source, tags) %>% filter(nchar(text) < 60, tags == 'statistics')
+quote_df <- read_csv('quote_df.csv')
 quote_num <- sample(1:nrow(quote_df), 1) 
 quote <- quote_df$text[quote_num]
 ran_num <- sample(1:nrow(selected_photos), 1)
