@@ -36,7 +36,8 @@ wallpaper <- wallpaper %>% image_annotate(text = quote, font = 'Times', size = 3
 
 ```
 
-## Here's your generated wallpaper
+## Here's your generated wallpaper! 
+
 
 `r wallpaper`
 
