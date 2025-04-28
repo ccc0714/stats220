@@ -34,5 +34,5 @@ if(image_info(wallpaper)[3] > 400){
 wallpaper <- wallpaper %>% image_annotate(text = quote, font = 'Times', size = 20, gravity = 'center', color = '#222222')
 ```
 
-`r wallpaper`
+testing this code 
 
