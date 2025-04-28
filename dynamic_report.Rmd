@@ -33,6 +33,7 @@ wallpaper <- image_read(selected_photos$medium[ran_num]) %>% image_scale(500)
 if(image_info(wallpaper)[3] > 400){
   wallpaper <- image_crop(wallpaper, '500x400')}
 wallpaper <- wallpaper %>% image_annotate(text = quote, font = 'Times', size = 20, gravity = 'center', color = '#222222')
-wallpaper
 ```
+
+`r wallpaper`
 
