@@ -26,6 +26,10 @@ h1, h2 {line-height: 0.1;
 ```{r eval=TRUE, echo=FALSE, error=FALSE, warning=FALSE}
 library(tidyverse)
 selected_photos <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQBZ1n2RDp2CQ8wsKVUKNc1v_ZsGYU6AU5z_nVyxeZ-oGnaNYQy1K7DojEE0ahuR6s7NGXyjxv0UVYn/pub?output=csv")
+try <- selected_photos$text[1]
 ```
 
 TEsting
+
+`r try`
+
