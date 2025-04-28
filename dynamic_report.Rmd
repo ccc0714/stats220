@@ -24,11 +24,19 @@ h1, h2 {line-height: 0.1;
 ```{r eval=TRUE, echo=FALSE, error=FALSE, warning=FALSE}
 library(tidyverse)
 library(magick)
-selected_photos <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQBZ1n2RDp2CQ8wsKVUKNc1v_ZsGYU6AU5z_nVyxeZ-oGnaNYQy1K7DojEE0ahuR6s7NGXyjxv0UVYn/pub?output=csv")
-try <- selected_photos$text[1]
+quote_df <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQBZ1n2RDp2CQ8wsKVUKNc1v_ZsGYU6AU5z_nVyxeZ-oGnaNYQy1K7DojEE0ahuR6s7NGXyjxv0UVYn/pub?output=csv")
+selected_photos <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSD5GQ00xQV9jhqSte32rnOXM4WJePiYurWHjz18TMEwkJqilSaDdtUMpw41ZBEkn4w7qpxNDhBFPOb/pub?output=csv")
+quote_num <- sample(1:nrow(quote_df), 1) 
+quote <- quote_df$text[quote_num]
+ran_num <- sample(1:nrow(selected_photos), 1)
+wallpaper <- image_read(selected_photos$medium[ran_num]) %>% image_scale(500) 
+if(image_info(wallpaper)[3] > 400){
+  wallpaper <- image_crop(wallpaper, '500x400')}
+wallpaper <- wallpaper %>% image_annotate(text = quote, font = 'Times', size = 20, gravity = 'center', color = '#222222')
+
 ```
 
 ## Here's your generated wallpaper
 
-`r try`
+`r wallpaper`
 
