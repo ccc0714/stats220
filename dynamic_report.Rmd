@@ -1,5 +1,5 @@
 ---
-title: My dynamic report
+title: Here's your wallpaper
 output: html_fragment
 ---
 
@@ -21,67 +21,16 @@ h1, h2 {line-height: 0.1;
 }
 ```
 
-## Tracking the frequency of user using social media in the last 7 days
-In this study, user (myself) is required to fill up a google form each time I use social media. After collecting the data, I analyze it using bar chart to find which social media is being used most frequently. Then, I generate another bar chart to see the number of time this social media is being use in the last 7 days and find the most and least frequent use day in the last 7 days. 
-
-## How many time was each social media use? 
 ```{r eval=TRUE, echo=FALSE, error=FALSE, warning=FALSE}
-library(tidyverse)
-
-#Reading data from google sheets and renaming columns
-logged_data <- read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRMOlNZbbutBcxUCVv8nIFP_2JEISCznRTTjtyXiTe04XGX_fBB8_XLL0dQQ5t3Y5sb2MbPuVBHKERy/pub?output=csv')
-latest_data <- logged_data %>% rename(social_media = 2,
-                                      start_time_by_hour = 3,
-                                      device = 4,
-                                      activity = 5)
-#Bar plot of each social media and the number of times it's use
-social_bar <- latest_data %>% ggplot() + geom_bar(aes(x = social_media, fill = social_media)) + 
-                          labs(title = 'frequency of each social media being use', y = 'frequency')
-
-social_bar
+library(magick)
+library(statquotes)
+quote_df <- quotes %>% select(text, source, tags) %>% filter(nchar(text) < 60, tags == 'statistics')
+quote_num <- sample(1:nrow(quote_df), 1) 
+quote <- quote_df$text[quote_num]
+ran_num <- sample(1:nrow(selected_photos), 1)
+wallpaper <- image_read(selected_photos$medium[ran_num]) %>% image_scale(500) 
+if(image_info(wallpaper)[3] > 400){
+  wallpaper <- image_crop(wallpaper, '500x400')}
+wallpaper <- wallpaper %>% image_annotate(text = quote, font = 'Times', size = 20, gravity = 'center', color = '#222222')
 ```
 
-From the bar chart above we can see the amount of time each social media is use by the user. We're curious each time when user is using these social media, what activities does the user engage most with, which is shown in the graph below. 
-
-```{r eval=TRUE, echo=FALSE, error=FALSE, warning=FALSE}
-#Further analyze with bar plot that show the frequency of each activity of each social media 
-social_activity_bar <- latest_data %>% ggplot() + geom_bar(aes(social_media, fill = activity), position = 'dodge') + 
-                                                  labs(title = 'frequency of each activity engage in social media', y = 'frequency')
-
-social_activity_bar
-#Finding which social media is being use the most by user
-testing <- latest_data %>% group_by(social_media) %>% summarize(frequency = n())
-max_index <- which.max(testing$frequency)
-objective <- testing$social_media[max_index]
-```
-
-## The most frequently use social media is `r objective`
-Knowing that `r objective` is most frequently use, we're curious in the last 7 days which day did user use the most and least `r objective`.
-
-```{r eval=TRUE, echo=FALSE, error=FALSE, warning=FALSE}
-#Creating a new column with the timestamp column and using that to find the frequency of our objective social media in the last 7 days
-obej_table <- latest_data %>% mutate(Date = substr(latest_data$Timestamp, 1, 5)) %>% 
-                              group_by(Date) %>% 
-                              filter(social_media == objective)
-unique_date <- unique(obej_table$Date) #Getting the table of date 
-day_bar <- obej_table %>% ggplot() + geom_bar(aes(x = Date, fill = Date)) +
-                                  labs(title = paste('Number of time', objective, 'is use in the last 7 days'), y = 'frequency') +
-                                  scale_x_discrete(limits = tail(unique_date, 7)) 
-day_bar
-
-#using summarize(frequency = n()) to find the frequency of each date in obej_table
-#using freq_table to find date that user uses the most and least social media and average number of social media use in the last 7 days
-freq_table <- obej_table %>% summarize(frequency = n()) %>% mutate(Date = factor(Date, levels = unique_date)) %>% arrange(Date) %>% tail(7)
-max_day <- freq_table$Date[which.max(freq_table$frequency)]
-max_num <- max(freq_table$frequency)
-min_day <- freq_table$Date[which.min(freq_table$frequency)]
-min_num <- min(freq_table$frequency)
-avg_use <- round(mean(freq_table$frequency), 1)
-
-#convert date to day of the week with weekdays function
-max_weekday <- as.Date(paste0(max_day, '/', format(Sys.Date(), "%Y")), format = "%d/%m/%Y") %>% weekdays()
-min_weekday <- as.Date(paste0(min_day, '/', format(Sys.Date(), "%Y")), format = "%d/%m/%Y") %>% weekdays()
-```
-
-In the last 7 days user use the most `r objective` on `r max_weekday`, `r max_day` with `r max_num` times and user use the least `r objective` on `r min_weekday`, `r min_day` with `r min_num` times. 
-The average number of time user use `r objective` in the last 7 days is `r avg_use`
