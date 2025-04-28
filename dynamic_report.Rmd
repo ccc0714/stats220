@@ -6,7 +6,7 @@ output: html_fragment
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, error=FALSE)
 library(tidyverse)
-selected_photos <- read_csv('selected_photos.csv')
+selected_photos <- read_csv('https://docs.google.com/spreadsheets/d/e/2PACX1vQBZ1n2RDp2CQ8wsKVUKNc1v_ZsGYU6AU5z_nVyxeZoGnaNYQy1K7DojEE0ahuR6s7NGXyjxv0UVYn/pub?output=csv')
 ```
 
 ```{css echo=FALSE}
@@ -24,7 +24,7 @@ h1, h2 {line-height: 0.1;
 
 ```{r eval=FALSE, echo=FALSE, error=FALSE, warning=FALSE}
 library(magick)
-quote_df <- read_csv('quote_df.csv')
+quote_df <-read_csv('https://docs.google.com/spreadsheets/d/e/2PACX1vQBZ1n2RDp2CQ8wsKVUKNc1v_ZsGYU6AU5z_nVyxeZoGnaNYQy1K7DojEE0ahuR6s7NGXyjxv0UVYn/pub?output=csv')
 quote_num <- sample(1:nrow(quote_df), 1) 
 quote <- quote_df$text[quote_num]
 ran_num <- sample(1:nrow(selected_photos), 1)
