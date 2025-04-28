@@ -29,10 +29,10 @@ selected_photos <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSD
 quote_num <- sample(1:nrow(quote_df), 1) 
 quote <- quote_df$text[quote_num]
 ran_num <- sample(1:nrow(selected_photos), 1)
-wallpaper <- image_read(selected_photos$medium[ran_num]) %>% image_scale(500) 
-if(image_info(wallpaper)[3] > 400){
-  wallpaper <- image_crop(wallpaper, '500x400')}
-wallpaper <- wallpaper %>% image_annotate(text = quote, font = 'Times', size = 20, gravity = 'center', color = '#222222')
+wallpaper <- image_read(selected_photos$large[ran_num]) %>% image_scale(1000) 
+if(image_info(wallpaper)[3] > 600){
+  wallpaper <- image_crop(wallpaper, '1000x600')}
+wallpaper <- wallpaper %>% image_annotate(text = quote, font = 'Times', size = 30, gravity = 'center', color = '#222222')
 
 ```
 
